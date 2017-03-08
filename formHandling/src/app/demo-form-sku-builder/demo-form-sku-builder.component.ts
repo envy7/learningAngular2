@@ -20,6 +20,18 @@ export class DemoFormSkuBuilderComponent{
 
   	this.sku = this.myForm.controls['sku'];
 
+  	this.sku.valueChanges.subscribe(
+  		(value: string) => {
+  			console.log('sku changed to:', value);
+  		}
+  	);
+
+  	this.myForm.valueChanges.subscribe(
+  		(form: any) => {
+  			console.log('form changed to:', form);
+  		}
+  	)
+
   }
 
   onSubmit(value: string): void{
