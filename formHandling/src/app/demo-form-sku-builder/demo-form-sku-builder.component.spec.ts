@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DemoFormSkuComponent } from './demo-form-sku.component';
+import { DemoFormSkuBuilderComponent } from './demo-form-sku-builder.component';
 
-describe('DemoFormSkuComponent', () => {
-  let component: DemoFormSkuComponent;
-  let fixture: ComponentFixture<DemoFormSkuComponent>;
+describe('DemoFormSkuBuilderComponent', () => {
+  let component: DemoFormSkuBuilderComponent;
+  let fixture: ComponentFixture<DemoFormSkuBuilderComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DemoFormSkuComponent ]
+      declarations: [ DemoFormSkuBuilderComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DemoFormSkuComponent);
+    fixture = TestBed.createComponent(DemoFormSkuBuilderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
