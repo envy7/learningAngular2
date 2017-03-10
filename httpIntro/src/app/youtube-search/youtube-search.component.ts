@@ -16,7 +16,7 @@ export class YoutubeSearchComponent implements OnInit {
 
 }
 
-class SearchResult{
+export class SearchResult{
 	id: string;
 	title: string;
 	description: string;
