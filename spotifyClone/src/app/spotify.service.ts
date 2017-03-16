@@ -1,7 +1,9 @@
 
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
+
+import 'rxjs/Rx';
 
 @Injectable()
 export class SpotifyService {
@@ -21,3 +23,6 @@ export class SpotifyService {
 
 }
 
+export var SPOTIFY_PROVIDERS: Array<any> = [
+  {provide: SpotifyService, useClass: SpotifyService}
+];
