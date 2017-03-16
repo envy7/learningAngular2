@@ -31,7 +31,7 @@ export class SearchComponent implements OnInit {
   	}
 
   	this.spotify
-  		.searchByTrack(this.query)
+  		.searchTrack(this.query)
   		.subscribe((res: any) => this.renderResults(res));
   }
 
