@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { SpotifyService } from './spotify.service'
 import { SearchComponent } from './search/search.component'
 
 

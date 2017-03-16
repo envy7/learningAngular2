@@ -8,6 +8,8 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { SearchComponent } from './search/search.component';
+import { SpotifyService } from './spotify.service'
+
 
 @NgModule({
   declarations: [
@@ -19,7 +21,7 @@ import { SearchComponent } from './search/search.component';
     FormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [SpotifyService, { provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
