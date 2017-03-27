@@ -7,11 +7,24 @@
             <input placeholder="E.g Dubai" id="first_name" type="text" class="validate">
           </div>
           <div class="input-field col m4">
-            <button class="btn waves-effect waves-light pink" type="submit" name="action">Submit
+            <button class="btn waves-effect waves-light" type="submit" name="action">Submit
               <i class="material-icons right">send</i>
             </button>
           </div>
         </div>
       </form>
   </div>
+  <div class="row"><h5 class="center-align">Some Popular Destinations</h5></div>
 </div>  
+
+
+<div class="row">
+  <div class="col m3" *ngFor="let city of mostVisitedCities">
+    <div class="card">
+      <div class="card-image">
+        <img class="z-depth-4" src={{city.imgUrl}}>
+        <span class="card-title">{{city.name}}</span>
+      </div>
+    </div>
+  </div>
+</div>
