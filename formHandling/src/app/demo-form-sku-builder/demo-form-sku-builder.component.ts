@@ -12,6 +12,7 @@ import { FormBuilder, FormGroup, Validators, AbstractControl, FormControl } from
 export class DemoFormSkuBuilderComponent{
   myForm: FormGroup;
   sku: AbstractControl;
+  formvalue: string;
 
   constructor(fb: FormBuilder) { 
   	this.myForm = fb.group({
