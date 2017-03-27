@@ -9,4 +9,3 @@ export class AppComponent {
   title = 'app works!';
 }
 
-//apikey = AIzaSyByn1EogEdVP3gI-xguSbqrrC_XE5RhVzA
