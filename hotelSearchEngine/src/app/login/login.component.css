@@ -1,0 +1,20 @@
+.divider-or {
+    text-align: center;
+    background-color: #fff;
+    margin: 0px 45%;
+    margin-top: -50px;
+}
+
+.divider-line {
+    margin: 40px 25%;
+}
+
+.login-icon {
+    padding-top: 7px;
+    max-height: 42px;
+}
+
+.hoverable.z-depth-1.col {
+    cursor: pointer;
+    margin-bottom : 15px;
+}
