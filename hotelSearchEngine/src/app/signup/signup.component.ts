@@ -16,4 +16,5 @@ export class SignupComponent implements OnInit {
   signup(email: string, password: any) {
     this.auth.signup(email, password);
   }
+
 }
