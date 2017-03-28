@@ -36,7 +36,7 @@ export class AuthService {
     )
   }
 
-  loginWithEmail(email, password){
+  loginWithEmail(email, password) {
     this.af.auth.login({
       email: email,
       password: password,
@@ -57,7 +57,7 @@ export class AuthService {
     )
   }
 
-  loginWithFb(){
+  loginWithFb() {
      this.af.auth.login({
       provider: AuthProviders.Facebook,
       method: AuthMethods.Popup,
@@ -74,7 +74,7 @@ export class AuthService {
     )
   }
 
-  loginWithGoogle(){
+  loginWithGoogle() {
      this.af.auth.login({
       provider: AuthProviders.Google,
       method: AuthMethods.Popup,
@@ -89,6 +89,10 @@ export class AuthService {
         alert(err);
       }
     )
+  }
+
+  logout() {
+    this.af.auth.logout();
   }
 
 }

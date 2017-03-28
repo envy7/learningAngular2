@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  loggedIn: boolean;
+
   mostVisitedCities: {name: string, imgUrl: string}[]  = [
     {name: "Bangkok", imgUrl: "../../../assets/images/places/bangkok.jpg"},
     {name: "London", imgUrl: "../../../assets/images/places/london.jpg"},
@@ -21,6 +23,7 @@ export class HomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    
   }
 
 }
