@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class GoogleapiService {
   GOOGLE_API_URL: string = 'https://maps.googleapis.com/maps/api/place/textsearch/json'; 
+  GOOGLE_GET_IMAGE_URL: string = 'https://maps.googleapis.com/maps/api/place/photo';
   GOOGLE_API_KEY: string = 'AIzaSyByn1EogEdVP3gI-xguSbqrrC_XE5RhVzA';
 
   constructor(public http: Http) { }
@@ -18,9 +19,19 @@ export class GoogleapiService {
     ].join('&');
 
     let queryUrl: string = `${this.GOOGLE_API_URL}?${params}`;
-    console.log(queryUrl);
-
     return this.http.request(queryUrl).map((res: any) => res.json());
+  }
+
+  getImage(ref: string) {
+    let params: string = [
+      `photoreference=${ref}`,
+      `maxwidth=400`,
+      `maxheight=200`,
+      `key=${this.GOOGLE_API_KEY}`
+    ].join('&');
+
+    let queryUrl: string = `${this.GOOGLE_GET_IMAGE_URL}?${params}`;
+    return this.http.request(queryUrl).map((res: any) => res.url);
   }
 
 }

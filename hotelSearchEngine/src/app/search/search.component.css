@@ -1,0 +1,23 @@
+.card-image {
+    width: 50%;
+    border-right: thick solid #ececec;
+    position: relative;
+}
+
+.card-image > img {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    margin: auto;
+}
+
+.hotel-title {
+    font-size: 20px;
+    margin-bottom: 10px !important;
+}
+
+.hotel-address {
+    margin-bottom: 10px !important;
+}

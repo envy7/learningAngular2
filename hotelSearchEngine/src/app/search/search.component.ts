@@ -9,7 +9,7 @@ import { GoogleapiService } from '../googleapi.service';
 })
 export class SearchComponent implements OnInit {
   query: string;
-  results: Object;
+  results;
 
   constructor(private googleapi: GoogleapiService, private router: Router, private route: ActivatedRoute) {
     this.route
@@ -31,8 +31,21 @@ export class SearchComponent implements OnInit {
         .search(this.query)
         .subscribe((res: any) => {
           console.log(res.results);
-          this.results = res.results;
+          this.results = res.results.slice(0, 5);
+          this.getImages();
         });
+  }
+
+  getImages(): void {
+    for(let result in this.results) {
+      if(this.results[result].hasOwnProperty("photos")){
+          this.googleapi
+            .getImage(this.results[result].photos[0].photo_reference)
+            .subscribe((res: any) => {
+              this.results[result].imageUrl = res;
+            })
+      } 
+    }
   }
 
 }
