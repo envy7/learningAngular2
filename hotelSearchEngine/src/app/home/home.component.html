@@ -4,10 +4,11 @@
       <form class="col m12" align="center">
         <div class="row">
           <div class="input-field col m8">
-            <input placeholder="E.g Dubai" id="first_name" type="text" class="validate">
+            <input #city placeholder="E.g Dubai" id="city_query" type="text" class="validate">
           </div>
           <div class="input-field col m4">
-            <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+            <button class="btn waves-effect waves-light" 
+              (click)="search(city.value)">Submit
               <i class="material-icons right">send</i>
             </button>
           </div>
@@ -19,14 +20,14 @@
 
 
 <div class="row">
-  <a>
-    <div class="col m3 pointer" *ngFor="let city of mostVisitedCities">
-      <div class="card">
-        <div class="card-image">
-          <img class="z-depth-1 hoverable" src={{city.imgUrl}}>
-          <span class="card-title">{{city.name}}</span>
+    <div class="col m12 l3 pointer" *ngFor="let city of mostVisitedCities">
+      <a href="#/search?query={{city.name}}">
+        <div class="card">
+          <div class="card-image">
+            <img class="z-depth-1 hoverable" src={{city.imgUrl}}>
+            <span class="card-title">{{city.name}}</span>
+          </div>
         </div>
-      </div>
+      </a>
     </div>
-  </a>
 </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -20,10 +21,14 @@ export class HomeComponent implements OnInit {
     {name: "Kuala Lampur", imgUrl: "../../../assets/images/places/kualalampur.jpg"}
   ]
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     
   }
 
+  search(city: string) {
+    console.log(city);
+    this.router.navigate(['search'], { queryParams : { query: city } });
+  }
 }
