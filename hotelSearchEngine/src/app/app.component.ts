@@ -28,7 +28,7 @@ export class AppComponent {
       }
     })
   }
-
+  
   setDetails(authObj) {
     this.userData = {
       "name" : authObj.auth.providerData[0].displayName,

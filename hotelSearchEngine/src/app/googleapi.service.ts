@@ -18,13 +18,9 @@ export class GoogleapiService {
     ].join('&');
 
     let queryUrl: string = `${this.GOOGLE_API_URL}?${params}`;
+    console.log(queryUrl);
 
-    return this.http.get(queryUrl)
-        .map((response: Response) => {
-          return (<any> response.json()).items.map(item => {
-            console.log("raw item", item);
-          });
-        });
+    return this.http.request(queryUrl).map((res: any) => res.json());
   }
 
 }
