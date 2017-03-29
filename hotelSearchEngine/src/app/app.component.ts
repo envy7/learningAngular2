@@ -19,6 +19,7 @@ export class AppComponent {
     this.af.auth.subscribe(auth => {
       if(auth){
         this.loggedIn = true;
+        console.log(auth);
         this.setDetails(auth);
       }
       else{

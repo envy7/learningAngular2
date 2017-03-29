@@ -5,13 +5,10 @@ import { Router } from '@angular/router';
 @Injectable()
 
 export class AuthService {
-  userdata = {};
   constructor(private af: AngularFire, private router: Router) {
     this.af.auth.subscribe(auth => {
       if(auth){
         console.log("logged in");
-        this.userdata = auth;
-        console.log(this.userdata);
       }
       else{
         console.log("not logged in");
@@ -25,7 +22,7 @@ export class AuthService {
       password: password
     }).then(
       (success) => {
-        console.log(success);
+       // console.log(success);
         this.router.navigate(['/home']);
       }
     ).catch(
@@ -46,7 +43,7 @@ export class AuthService {
       method: AuthMethods.Password,
     }).then(
       (success) => {
-        console.log(success);
+        //console.log(success);
         this.router.navigate(['/home']);
       }
     ).catch(
@@ -63,7 +60,7 @@ export class AuthService {
       method: AuthMethods.Popup,
     }).then(
       (success) => {
-        console.log(success);
+        //console.log(success);
         this.router.navigate(['/home']);
       }
     ).catch(
@@ -80,7 +77,7 @@ export class AuthService {
       method: AuthMethods.Popup,
     }).then(
       (success) => {
-        console.log(success);
+        //console.log(success);
         this.router.navigate(['/home']);
       }
     ).catch(

@@ -12,6 +12,7 @@ import { SignupComponent } from './signup/signup.component';
 
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { AUTH_PROVIDERS } from './auth.service';
+import { GOOGLEAPI_PROVIDERS } from './googleapi.service';
 
 const myFirebaseConfig = {
   apiKey: ' AIzaSyBkq-O3AIgj5MX2FGvDylmrz06bLvppLJE',
@@ -46,7 +47,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     AngularFireModule.initializeApp(myFirebaseConfig, myFirebaseAuthConfig)
   ],
-  providers: [AUTH_PROVIDERS, { provide: LocationStrategy, useClass: HashLocationStrategy }],
+  providers: [GOOGLEAPI_PROVIDERS, AUTH_PROVIDERS, { provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
