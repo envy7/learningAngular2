@@ -8,7 +8,8 @@ import { GoogleapiService } from '../googleapi.service';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
-  currPropSortedBy: string;
+  currPropSortedBy: string = "cost";
+  reverseProp: boolean = true;
   query: string;
   results;
 
@@ -38,7 +39,7 @@ export class SearchComponent implements OnInit {
           //add random price tags to hotels
           this.addPriceTag();
           //sort by price default
-          this.sortBy("cost", true);
+          this.sortBy(this.currPropSortedBy, null);
         });
   }
 
@@ -66,11 +67,21 @@ export class SearchComponent implements OnInit {
   }
 
   sortBy(property, reverse): void {
-    if(property == '')
-      property = this.currPropSortedBy;
-    else  
-      this.currPropSortedBy = property;
 
+    if(property == ""){
+      property = this.currPropSortedBy;
+    } 
+    else {
+      this.currPropSortedBy = property;
+    }  
+
+    if(reverse == null) {
+      reverse = this.reverseProp;
+    }
+    else {
+      this.reverseProp = reverse; 
+    }  
+      
     this.results = this.results.sort(function(a, b){
       if(!reverse)
         return a[property] - b[property];
