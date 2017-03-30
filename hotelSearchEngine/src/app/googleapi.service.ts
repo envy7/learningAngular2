@@ -7,7 +7,9 @@ import 'rxjs/add/operator/map';
 export class GoogleapiService {
   GOOGLE_API_URL: string = 'https://maps.googleapis.com/maps/api/place/textsearch/json'; 
   GOOGLE_GET_IMAGE_URL: string = 'https://maps.googleapis.com/maps/api/place/photo';
-  GOOGLE_API_KEY: string = 'AIzaSyByn1EogEdVP3gI-xguSbqrrC_XE5RhVzA';
+  GOOGLE_GEOCODING_URL: string = 'https://maps.googleapis.com/maps/api/geocode/json';
+  //GOOGLE_API_KEY: string = 'AIzaSyByn1EogEdVP3gI-xguSbqrrC_XE5RhVzA';
+  GOOGLE_API_KEY: string = 'AIzaSyCachCEaa1Wh7SZjf0Q_y2waePAtNaFTZk';
 
   constructor(public http: Http) { }
 
@@ -32,6 +34,17 @@ export class GoogleapiService {
 
     let queryUrl: string = `${this.GOOGLE_GET_IMAGE_URL}?${params}`;
     return this.http.request(queryUrl).map((res: any) => res.url);
+  }
+
+  getLocation(latlng: string) {
+    let params: string = [
+      `latlng=${latlng}`,
+      `key=${this.GOOGLE_API_KEY}`,
+    ].join('&');
+
+    let queryUrl: string = `${this.GOOGLE_GEOCODING_URL}?${params}`;
+    console.log(queryUrl);
+    return this.http.request(queryUrl).map((res: any) => res.json());
   }
 
 }
