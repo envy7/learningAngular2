@@ -30,6 +30,9 @@ export class HomeComponent implements OnInit {
   }
 
   search(city: string) {
+    if(city == '') {
+      city = this.currentcity;
+    }
     this.router.navigate(['search'], { queryParams : { query: city } });
   }
 

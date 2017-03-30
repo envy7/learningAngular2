@@ -8,6 +8,7 @@ import { GoogleapiService } from '../googleapi.service';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
+  currPropSortedBy: string;
   query: string;
   results;
 
@@ -32,7 +33,12 @@ export class SearchComponent implements OnInit {
         .subscribe((res: any) => {
           console.log(res.results);
           this.results = res.results.slice(0, 5);
+          //get images of hotels from image references
           this.getImages();
+          //add random price tags to hotels
+          this.addPriceTag();
+          //sort by price default
+          this.sortBy("cost", true);
         });
   }
 
@@ -46,6 +52,35 @@ export class SearchComponent implements OnInit {
             })
       } 
     }
+  }
+
+  addPriceTag(): void {
+    let priceTag: number;
+    let maximumPrice: number = 10000;
+    let minimumPrice: number = 3000;
+    
+    for(let result in this.results) {
+      priceTag = Math.round(Math.random() * (maximumPrice - minimumPrice - 1)) + minimumPrice;
+      this.results[result].cost = priceTag;
+    }
+  }
+
+  sortBy(property, reverse): void {
+    if(property == '')
+      property = this.currPropSortedBy;
+    else  
+      this.currPropSortedBy = property;
+
+    this.results = this.results.sort(function(a, b){
+      if(!reverse)
+        return a[property] - b[property];
+      else
+        return b[property] - a[property];  
+    })
+  }
+
+  test(event: Event) {
+    console.log(event);
   }
 
 }

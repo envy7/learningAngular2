@@ -1,28 +1,17 @@
-<!--<div *ngFor = "let result of results">
-  <p>{{result.name}}</p>
-  <img src="{{result.imageUrl}}">
-</div>-->
-
- <!--<div class="row" *ngFor = "let result of results">
-        <div class="col s12 m4"></div>
-        <div class="col s12 m4">
-          <div class="card">
-            <div class="card-image">
-              <img src="{{result.imageUrl}}">
-              <span class="card-title">{{result.name}}</span>
-            </div>
-            <div class="card-content">
-              <p>{{result.formatted_address}}<br>
-              {{result.rating}}</p>
-            </div>
-            <div class="card-action">
-              <a href="#">This is a link</a>
-            </div>
-          </div>
-        </div>
-        <div class="col s12 m4"></div>
-</div>-->
 <div class="container">
+    <div class="row sort-options">
+      <div class="input-field col m4 s12">
+        <select class="browser-default" (change)="sortBy($event.target.value, true)">
+          <option value="cost">Price</option>
+          <option value="rating">Rating</option>
+        </select>
+        <p>
+          <input type="checkbox" class="filled-in" id="reverse" checked="checked" (change)="sortBy('', $event.target.checked)"/>
+          <label for="reverse">Reversed</label>
+        </p>
+      </div>
+    </div>
+    
     <div class="row" *ngFor = "let result of results">
       <div class="col s12 m2"></div>
       <div class="col s12 m8">
@@ -37,7 +26,14 @@
               <p class="hotel-rating">Rating: {{result.rating}}</p>
             </div>
             <div class="card-action">
-              <a href="#">This is a link</a>
+              <a>
+                <button class="btn waves-effect waves-light indigo">&#8377;{{result.cost}}</button>
+              </a>
+              <a>
+                <button class="btn waves-effect waves-light">Book Now
+                  <i class="material-icons right">send</i>
+                </button>
+              </a>
             </div>
           </div>
         </div>
