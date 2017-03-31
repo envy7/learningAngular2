@@ -10,10 +10,12 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { SignupComponent } from './signup/signup.component';
 import { SearchComponent } from './search/search.component';
+import { BookingComponent } from './booking/booking.component';
 
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { AUTH_PROVIDERS } from './auth.service';
 import { GOOGLEAPI_PROVIDERS } from './googleapi.service';
+
 
 
 const myFirebaseConfig = {
@@ -33,7 +35,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'search', component: SearchComponent }
+  { path: 'search', component: SearchComponent },
+  { path: 'booking', component: BookingComponent }
 ]
 
 @NgModule({
@@ -42,7 +45,8 @@ const routes: Routes = [
     LoginComponent,
     HomeComponent,
     SignupComponent,
-    SearchComponent
+    SearchComponent,
+    BookingComponent
   ],
   imports: [
     BrowserModule,

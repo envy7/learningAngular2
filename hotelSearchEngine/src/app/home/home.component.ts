@@ -26,7 +26,10 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router, private googleapi: GoogleapiService) { }
 
   ngOnInit() {
-    this.getLocation();
+    if(!localStorage.getItem('currentcity'))
+      this.getLocation();
+    else
+      this.currentcity = localStorage.getItem('currentcity');  
   }
 
   search(city: string) {
@@ -46,7 +49,9 @@ export class HomeComponent implements OnInit {
           latlng = `${latitude},${longitude}`;
           console.log(latlng);
           this.googleapi.getLocation(latlng).subscribe((res: any) => {
+            //console.log(res);
             this.currentcity = res.results[0].address_components[3].long_name;
+            localStorage.setItem('currentcity', this.currentcity);
             console.log(this.currentcity);
           });
       });

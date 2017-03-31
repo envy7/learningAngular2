@@ -1,25 +1,39 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute} from '@angular/router';
 import { GoogleapiService } from '../googleapi.service';
+import { AngularFire } from 'angularfire2';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
 })
+
 export class SearchComponent implements OnInit {
   currPropSortedBy: string = "cost";
   reverseProp: boolean = true;
   query: string;
   results;
+  loggedIn : boolean;
 
-  constructor(private googleapi: GoogleapiService, private router: Router, private route: ActivatedRoute) {
+  constructor(private googleapi: GoogleapiService, 
+              private router: Router, 
+              private route: ActivatedRoute, 
+              private af: AngularFire) {
     this.route
         .queryParams
         .subscribe(params => {this.query = params['query'] || ''})
   }
 
   ngOnInit() {
+    this.af.auth.subscribe(auth => {
+      if(auth){
+        this.loggedIn = true;
+      }
+      else{
+        this.loggedIn = false;        
+      }
+    })
     this.search();
   }
 
@@ -90,8 +104,14 @@ export class SearchComponent implements OnInit {
     })
   }
 
-  test(event: Event) {
-    console.log(event);
+  bookHotel(hotelDetails): void {
+    localStorage.setItem('hotelObj', JSON.stringify(hotelDetails));
+    if(this.loggedIn) {
+       this.router.navigate(['/booking'])
+    }
+    else {
+      this.router.navigate(['/login']);
+    }
   }
 
 }

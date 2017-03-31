@@ -22,13 +22,11 @@ export class AuthService {
       password: password
     }).then(
       (success) => {
-       // console.log(success);
-        this.router.navigate(['/home']);
+       this.successCallback(success);
       }
     ).catch(
       (err) => {
-        console.log(err);
-        alert(err);
+        this.errorCallback(err);
       }
     )
   }
@@ -43,13 +41,11 @@ export class AuthService {
       method: AuthMethods.Password,
     }).then(
       (success) => {
-        //console.log(success);
-        this.router.navigate(['/home']);
+        this.successCallback(success);
       }
     ).catch(
       (err) => {
-        console.log(err);
-        alert(err);
+        this.errorCallback(err);
       }
     )
   }
@@ -60,13 +56,11 @@ export class AuthService {
       method: AuthMethods.Popup,
     }).then(
       (success) => {
-        //console.log(success);
-        this.router.navigate(['/home']);
+        this.successCallback(success);
       }
     ).catch(
       (err) => {
-        console.log(err);
-        alert(err);
+        this.errorCallback(err);
       }
     )
   }
@@ -77,19 +71,29 @@ export class AuthService {
       method: AuthMethods.Popup,
     }).then(
       (success) => {
-        //console.log(success);
-        this.router.navigate(['/home']);
+        this.successCallback(success);
       }
     ).catch(
       (err) => {
-        console.log(err);
-        alert(err);
+       this.errorCallback(err);
       }
     )
   }
 
   logout() {
     this.af.auth.logout();
+  }
+
+  successCallback(success) {
+    if(localStorage.getItem('hotelObj'))
+      this.router.navigate(['/booking']);
+    else  
+      this.router.navigate(['/home']);
+  }
+
+  errorCallback(err) {
+    console.log(err);
+    alert(err);
   }
 
 }
