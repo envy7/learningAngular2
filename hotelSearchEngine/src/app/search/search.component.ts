@@ -63,6 +63,7 @@ export class SearchComponent implements OnInit {
           this.googleapi
             .getImage(this.results[result].photos[0].photo_reference)
             .subscribe((res: any) => {
+              console.log(res);
               this.results[result].imageUrl = res;
             })
       } 

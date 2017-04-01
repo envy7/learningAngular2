@@ -8,8 +8,8 @@ export class GoogleapiService {
   GOOGLE_API_URL: string = 'https://maps.googleapis.com/maps/api/place/textsearch/json'; 
   GOOGLE_GET_IMAGE_URL: string = 'https://maps.googleapis.com/maps/api/place/photo';
   GOOGLE_GEOCODING_URL: string = 'https://maps.googleapis.com/maps/api/geocode/json';
-  // GOOGLE_API_KEY: string = 'AIzaSyByn1EogEdVP3gI-xguSbqrrC_XE5RhVzA';
-  GOOGLE_API_KEY: string = 'AIzaSyCachCEaa1Wh7SZjf0Q_y2waePAtNaFTZk';
+  GOOGLE_API_KEY: string = 'AIzaSyByn1EogEdVP3gI-xguSbqrrC_XE5RhVzA';
+  // GOOGLE_API_KEY: string = 'AIzaSyCachCEaa1Wh7SZjf0Q_y2waePAtNaFTZk';
 
   constructor(public http: Http) { }
 

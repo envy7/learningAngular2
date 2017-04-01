@@ -1,3 +1,22 @@
-<p>
-  booking works!
-</p>
+<div class="row">
+  <div class="col l3 m2"></div>
+  <div class="col s12 l6 m8">
+    <div class="card">
+      <div class="card-image">
+        <img src="{{hotelDetails.imageUrl}}">
+        <span class="card-title">{{hotelDetails.name}}</span>
+      </div>
+      <div class="card-content">
+        <p>{{hotelDetails.formatted_address}}</p>
+      </div>
+      <div class="card-action">
+        <a>
+          <button class="btn waves-effect waves-light" (click)="pay()">Pay &#8377;{{hotelDetails.cost}}
+            <i class="material-icons right"></i>
+          </button>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="col l3 m2"></div>
+</div>

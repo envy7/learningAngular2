@@ -6,10 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./booking.component.css']
 })
 export class BookingComponent implements OnInit {
+  hotelDetails: Object;
 
   constructor() { }
 
   ngOnInit() {
+    this.hotelDetails = JSON.parse(localStorage.getItem("hotelObj"));
+    console.log(this.hotelDetails);
   }
 
 }
