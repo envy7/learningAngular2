@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
-import { AppComponent } from '../app.component'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-booking',
@@ -10,23 +10,57 @@ import { AppComponent } from '../app.component'
 export class BookingComponent implements OnInit {
   hotelDetails: Object;
   items: FirebaseListObservable<any>;
+  user;
   userData;
+  fallbackImageUrl = "../../assets/images/icons/bed.png";
 
-  constructor(private af: AngularFire, public appData: AppComponent) {
-    this.userData = this.appData.userData;
-    console.log(this.userData);
-    this.items = af.database.list(`users/${this.userData.uid}/bookings`);
+  constructor(private af: AngularFire, private router: Router) {
+    
   }
 
   ngOnInit() {
+    this.af.auth.subscribe(auth => {
+      if(auth){
+        console.log(auth);
+        this.setDetails(auth);
+        this.items = this.af.database.list(`users/${this.userData.uid}/bookings`);
+        this.user = this.af.database.list(`users/${this.userData.uid}`);
+        this.fetchWallet();
+      }
+      else{
+        console.log("not logged in");
+      }
+    })
     this.hotelDetails = JSON.parse(localStorage.getItem("hotelObj"));
     console.log(this.hotelDetails);
   }
 
   pay(hotelDetails): void {
+    let coins = hotelDetails.price * (5 / 100);
+    this.userData.wallet += coins;
     this.items.push({
       "hotel" : hotelDetails.name,
       "price" : hotelDetails.cost
+    })
+    this.user.update("wallet", this.userData.wallet);
+    this.router.navigate(['/home']);
+  }
+
+  setDetails(authObj) {
+    this.userData = {
+      "name" : authObj.auth.providerData[0].displayName,
+      "email" : authObj.auth.providerData[0].email,
+      "photoUrl" : authObj.auth.providerData[0].photoURL,
+      "uid" : authObj.auth.providerData[0].uid
+    }  
+  }
+
+  fetchWallet() {
+    console.log(this.userData.uid);
+    this.user.subscribe(snapshot => {
+      console.log(snapshot);
+      this.userData.wallet = snapshot.wallet;
+      console.log(this.userData.wallet);
     })
   }
 }

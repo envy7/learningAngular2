@@ -27,6 +27,7 @@ export class GoogleapiService {
     let params: string = [
       `photoreference=${ref}`,
       `maxwidth=600`,
+      `maxheight=200`,
       `key=${this.GOOGLE_API_KEY}`
     ].join('&');
 

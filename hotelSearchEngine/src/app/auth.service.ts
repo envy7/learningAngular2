@@ -121,7 +121,10 @@ export class AuthService {
 
   successCallback(success, firsttime) {
     //console.log(success);
-    //set user in database if user signing up and not logging in 
+    //set user in database if user signing up and not logging in
+
+    //intialize 0 money in wallet
+    success.auth.providerData[0].wallet = 0; 
     if(firsttime){
       this.users.update(success.auth.providerData[0].uid, success.auth.providerData[0]);
     }
