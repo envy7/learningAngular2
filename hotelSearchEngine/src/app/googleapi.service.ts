@@ -26,8 +26,7 @@ export class GoogleapiService {
   getImage(ref: string) {
     let params: string = [
       `photoreference=${ref}`,
-      `maxwidth=400`,
-      `maxheight=200`,
+      `maxwidth=600`,
       `key=${this.GOOGLE_API_KEY}`
     ].join('&');
 
