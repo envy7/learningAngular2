@@ -20,5 +20,24 @@
         </button>
       </div>
     </form>
+  </div>
+  <div class="row">
+    <hr class="divider-line">
+    <div class="divider-or">OR</div>
+  </div>
+  <div class="row">
+    <div class="col s12 m5 hoverable z-depth-1" (click)="signupWithGoogle()">
+        <div class="row" style="margin-bottom:0px"> 
+            <div class="col s3"><img class="responsive-img login-icon" src="../../assets/images/icons/google.png" alt="google icon"></div>
+            <div class="col s9"><p class="auth_provider_text">Use My Google Account</p></div>
+        </div>
+    </div>
+    <div class="col s12 m2"></div>
+    <div class="col s12 m5 hoverable z-depth-1" (click)="signupWithFb()">
+        <div class="row" style="margin-bottom:0px">
+            <div class="col s3"><img class="responsive-img login-icon" src="../../assets/images/icons/facebook.png" alt="facebook icon"></div>
+            <div class="col s9"><p class="auth_provider_text">Use My Facebook Account</p></div>
+        </div>
+    </div>
   </div>     
 </div>

@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
-import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
+import { AngularFire, AuthProviders, AuthMethods, FirebaseListObservable } from 'angularfire2';
 import { Router } from '@angular/router';
 
 @Injectable()
 
 export class AuthService {
+  users: FirebaseListObservable<any>;
   constructor(private af: AngularFire, private router: Router) {
+    //for debugging
     this.af.auth.subscribe(auth => {
       if(auth){
         console.log("logged in");
@@ -14,6 +16,9 @@ export class AuthService {
         console.log("not logged in");
       }
     })
+
+    //setting reference
+    this.users = af.database.list("users");
   }
 
   signup(email, password) {  
@@ -22,11 +27,41 @@ export class AuthService {
       password: password
     }).then(
       (success) => {
-       this.successCallback(success);
+       this.successCallback(success, true);
       }
     ).catch(
       (err) => {
         this.errorCallback(err);
+      }
+    )
+  }
+
+  signupWithFb() {
+     this.af.auth.login({
+      provider: AuthProviders.Facebook,
+      method: AuthMethods.Popup,
+    }).then(
+      (success) => {
+        this.successCallback(success, true);
+      }
+    ).catch(
+      (err) => {
+        this.errorCallback(err);
+      }
+    )
+  }
+
+  signupWithGoogle() {
+     this.af.auth.login({
+      provider: AuthProviders.Google,
+      method: AuthMethods.Popup,
+    }).then(
+      (success) => {
+        this.successCallback(success, true);
+      }
+    ).catch(
+      (err) => {
+       this.errorCallback(err);
       }
     )
   }
@@ -41,7 +76,7 @@ export class AuthService {
       method: AuthMethods.Password,
     }).then(
       (success) => {
-        this.successCallback(success);
+        this.successCallback(success, false);
       }
     ).catch(
       (err) => {
@@ -56,7 +91,7 @@ export class AuthService {
       method: AuthMethods.Popup,
     }).then(
       (success) => {
-        this.successCallback(success);
+        this.successCallback(success, false);
       }
     ).catch(
       (err) => {
@@ -71,7 +106,7 @@ export class AuthService {
       method: AuthMethods.Popup,
     }).then(
       (success) => {
-        this.successCallback(success);
+        this.successCallback(success, false);
       }
     ).catch(
       (err) => {
@@ -84,7 +119,13 @@ export class AuthService {
     this.af.auth.logout();
   }
 
-  successCallback(success) {
+  successCallback(success, firsttime) {
+    //console.log(success);
+    //set user in database if user signing up and not logging in 
+    if(firsttime){
+      this.users.update(success.auth.providerData[0].uid, success.auth.providerData[0]);
+    }
+  
     if(localStorage.getItem('hotelObj'))
       this.router.navigate(['/booking']);
     else  
