@@ -37,13 +37,14 @@ export class BookingComponent implements OnInit {
 
   pay(hotelDetails): void {
     let coins = hotelDetails.cost * (1 / 100);
-    this.userData.wallet += coins;
+    this.userData.wallet = this.userData.wallet + coins;
+    let wallet = this.userData.wallet;
     this.items.push({
       "hotel" : hotelDetails.name,
       "price" : hotelDetails.cost
-    })
+    });
     this.user.update({
-      "wallet" : this.userData.wallet
+      "wallet" : Math.round(wallet)
     });
     this.router.navigate(['/home']);
   }
