@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class BookingComponent implements OnInit {
   hotelDetails: Object;
   items: FirebaseListObservable<any>;
-  user;
+  user: FirebaseObjectObservable<any>;
   userData;
   fallbackImageUrl = "../../assets/images/icons/bed.png";
 
@@ -24,7 +24,7 @@ export class BookingComponent implements OnInit {
         console.log(auth);
         this.setDetails(auth);
         this.items = this.af.database.list(`users/${this.userData.uid}/bookings`);
-        this.user = this.af.database.list(`users/${this.userData.uid}`);
+        this.user = this.af.database.object(`users/${this.userData.uid}`, { preserveSnapshot: true });
         this.fetchWallet();
       }
       else{
@@ -36,13 +36,15 @@ export class BookingComponent implements OnInit {
   }
 
   pay(hotelDetails): void {
-    let coins = hotelDetails.price * (5 / 100);
+    let coins = hotelDetails.cost * (1 / 100);
     this.userData.wallet += coins;
     this.items.push({
       "hotel" : hotelDetails.name,
       "price" : hotelDetails.cost
     })
-    this.user.update("wallet", this.userData.wallet);
+    this.user.update({
+      "wallet" : this.userData.wallet
+    });
     this.router.navigate(['/home']);
   }
 
@@ -56,11 +58,10 @@ export class BookingComponent implements OnInit {
   }
 
   fetchWallet() {
-    console.log(this.userData.uid);
+    //console.log(this.userData.uid);
     this.user.subscribe(snapshot => {
-      console.log(snapshot);
-      this.userData.wallet = snapshot.wallet;
-      console.log(this.userData.wallet);
+      this.userData.wallet = snapshot.val().wallet;
+      console.log(this.userData);
     })
   }
 }
