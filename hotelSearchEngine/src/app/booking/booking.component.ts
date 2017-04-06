@@ -8,11 +8,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./booking.component.css']
 })
 export class BookingComponent implements OnInit {
-  hotelDetails: Object;
+  hotelDetails;
   items: FirebaseListObservable<any>;
   user: FirebaseObjectObservable<any>;
   userData;
   fallbackImageUrl = "../../assets/images/icons/bed.png";
+  discountApplied: boolean = false;
 
   constructor(private af: AngularFire, private router: Router) {
     
@@ -64,5 +65,15 @@ export class BookingComponent implements OnInit {
       this.userData.wallet = snapshot.val().wallet;
       console.log(this.userData);
     })
+  }
+
+  applyDiscount() {
+    //deduct the money in wallet from price of hotel
+    this.discountApplied = true;
+    this.hotelDetails.cost -= this.userData.wallet;
+    this.user.update({
+      "wallet" : 0
+    });
+    console.log(this.hotelDetails.cost);
   }
 }
