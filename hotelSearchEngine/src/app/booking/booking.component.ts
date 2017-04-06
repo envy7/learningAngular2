@@ -13,7 +13,7 @@ export class BookingComponent implements OnInit {
   user: FirebaseObjectObservable<any>;
   userData;
   fallbackImageUrl = "../../assets/images/icons/bed.png";
-  discountApplied: boolean = false;
+  showDiscount: boolean = false;
 
   constructor(private af: AngularFire, private router: Router) {
     
@@ -63,13 +63,15 @@ export class BookingComponent implements OnInit {
     //console.log(this.userData.uid);
     this.user.subscribe(snapshot => {
       this.userData.wallet = snapshot.val().wallet;
+      if(this.userData.wallet != 0)
+        this.showDiscount = true;
       console.log(this.userData);
     })
   }
 
   applyDiscount() {
     //deduct the money in wallet from price of hotel
-    this.discountApplied = true;
+    this.showDiscount = false;
     this.hotelDetails.cost -= this.userData.wallet;
     this.user.update({
       "wallet" : 0

@@ -1,7 +1,7 @@
 <div class="row" style="margin-top: 50px">
   <div class="col l3 m2"></div>
   <div class="col s12 l6 m8">
-    <div *ngIf="!discountApplied || userData.wallet != 0" class="row" style="background-color: #3f51b5; margin-bottom:0px">
+    <div *ngIf="showDiscount" class="row" style="background-color: #3f51b5; margin-bottom:0px">
       <div class="col m8"><h5 style="color:#fff">You have &#8377;{{userData.wallet}} in your wallet</h5></div>
       <div class="col m4" style="margin: 0.42rem 0 .656rem 0">
         <button class="btn waves-effect waves-light" (click)="applyDiscount()">Apply Discount</button>
