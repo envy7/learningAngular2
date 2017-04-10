@@ -47,6 +47,7 @@ export class BookingComponent implements OnInit {
     this.user.update({
       "wallet" : Math.round(wallet)
     });
+    localStorage.removeItem('hotelObj');
     this.router.navigate(['/home']);
   }
 

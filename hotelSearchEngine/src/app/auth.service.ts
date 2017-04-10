@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 
 export class AuthService {
   users: FirebaseListObservable<any>;
+  key;
   constructor(private af: AngularFire, private router: Router) {
     //for debugging
     this.af.auth.subscribe(auth => {
@@ -27,7 +28,7 @@ export class AuthService {
       password: password
     }).then(
       (success) => {
-       this.successCallback(success, true);
+        this.successforSignUp(success);
       }
     ).catch(
       (err) => {
@@ -133,6 +134,19 @@ export class AuthService {
       this.router.navigate(['/booking']);
     else  
       this.router.navigate(['/home']);
+  }
+
+  successforSignUp(success) {
+    let self = this;
+    let key;
+    this.users.push(success.auth.providerData[0]).then((item) => {
+      // console.log(value.path.o[1]);
+      // this.key = value.path.o[1];
+      console.log(item.key);
+      key = item.key;
+      self.af.database.object(`users/${key}`, { preserveSnapshot: true }).update({"uid" : key});
+    });
+ 
   }
 
   errorCallback(err) {
